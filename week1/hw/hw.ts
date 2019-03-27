@@ -15,20 +15,88 @@ const getDataFromAPI = (url: string) =>
 			.catch(err => rej(err));
 	});
 
-// all these parantheses and braces creates and instantly calls a function.
-//This is known as an Instantly Invoked Function Expression (IIFE).
-// It has a lot of uses but in this case, since await can only be used in async functions, it's needed
-(async () => {
-	console.log(await getDataFromAPI('https://spot.benc.me/?time=1549939921')); // sample call - delete before you submit
-})();
-
 // write your homework here
 
-// put all this in your "objectively" function after you make it
-const whatAmI = { 0: 'A', 1: 'B', 2: 'C', 3: 'D' };
+const objectively = () => {
+	// Part 1
+	console.log(console);
+	// Part 2
+	const whatAmI = { 0: 'A', 1: 'B', 2: 'C', 3: 'D' };
+	// Part 3
+	(async () => {
+		let response = <[{
+			name: string, score: number,
+			spots: number, spotted: number, invalidated: number, unique: number,
+			id: string
+		}]>(await getDataFromAPI('https://spot.benc.me/?time=1549939921'))// sample call - delete before you submit
 
-// put this stuff in your "awry" function after you make it
-const docTester = [];
-// fill docTester with 1000 random integers between 0 and 99
-for (let i = 0; i < 1000; i++) docTester[i] = Math.floor(Math.random() * 100);
-// console.log(docTester); // uncomment this to see the array logged
+		const rankByUnique = (n: number) => {
+			response.sort(
+				function (a, b) {
+					const comp = b.unique - a.unique
+					if (comp !== 0) {
+						return comp
+					}
+					return b.score - a.score
+				})
+			return response[n - 1]
+		}
+		// Testing
+
+		//console.log("Leaderboard according to rankByUnique: ")
+		//console.log(rankByUnique(1));
+		//console.log(rankByUnique(2));
+		//console.log(rankByUnique(3));
+		//console.log(rankByUnique(4));
+		//console.log(rankByUnique(5));
+	})();
+}
+objectively();
+
+const awry = () => {
+	const docTester: number[] = [];
+	for (let i = 0; i < 1000; i++) docTester[i] = Math.floor(Math.random() * 100);
+
+	// Part 1
+	let docTesterIndex: number[] = [];
+
+	docTester.forEach((i, index) => docTesterIndex[index] = i + index);
+
+	// Part 2
+	docTester.map((i, index) => docTesterIndex[index] = i + index);
+
+	// Part 3
+	// console.log("Check sum: ");
+	console.log(docTester.map((i, index) => docTesterIndex[index] = i + index).reduce((acc, i) => (acc += i), 0));
+
+	// Part 4
+	(async () => {
+		let response = <[{
+			name: string, score: number,
+			spots: number, spotted: number, invalidated: number, unique: number,
+			id: string
+		}]>(await getDataFromAPI('https://spot.benc.me/?time=1549939921'))// sample call - delete before you submit
+
+		const rankByUniqueAndFiltered = (n: number) => {
+			let newresponse = response.filter(entry => entry.spotted >= 3 || entry.spotted == 0).sort(
+				function (a, b) {
+					const n = b.unique - a.unique
+					if (n !== 0) {
+						return n
+					}
+					return b.score - a.score
+				})
+			return newresponse[n - 1]
+		}
+		// Testing
+
+		//console.log("Leaderboard according to rankByUniqueAndFiltered: ")
+		//console.log(rankByUniqueAndFiltered(1));
+		//console.log(rankByUniqueAndFiltered(2));
+		//console.log(rankByUniqueAndFiltered(3));
+		//console.log(rankByUniqueAndFiltered(4));
+		//console.log(rankByUniqueAndFiltered(5));
+	})();
+}
+awry();
+

@@ -39,7 +39,7 @@ function hello(param: any) {
 // hello("73")
 // or this
 const foo = 7;
-const hola = function(param: string) {
+const hola = function (param: string) {
 	console.log(param);
 };
 
