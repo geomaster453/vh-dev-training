@@ -54,7 +54,7 @@ const asyncAwaitExample = async (): Promise<Record<string, any>[]> => {
 };
 
 (async () => {
-	callbackExample();
-	promiseExample().then(res => console.log(res));
+	//callbackExample();
+	//promiseExample().then(res => console.log(res));
 	console.log(await asyncAwaitExample());
 })();

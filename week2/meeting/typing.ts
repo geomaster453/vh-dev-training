@@ -1,7 +1,8 @@
 // let's look at the issue that a lot of you had on your homework.
 import fetch from 'node-fetch';
+import { SpotPerson } from '../../week1/hw/hw-solution';
 
-const getDataFromAPI = (url: string) =>
+const getDataFromAPI = (url: string): Promise<SpotPerson[]> =>
 	new Promise((res, rej) => {
 		fetch(url)
 			.then(data => data.json())
@@ -18,4 +19,5 @@ const getDataFromAPI = (url: string) =>
 	data.filter(el => el.unique > 1); // ruh roh
 
 	// let's write the interface for https://nominatim.openstreetmap.org/search?q=Vanderbilt%20University&format=json
+
 })();
